@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen</title>
+  </head>
+  <body>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(circle at 50% 40%, #303030, #101010 70%);
+  color: white;
+}
+
+/* ---------- BACKGROUND ---------- */
+
+.pandas {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.panda {
+  position: absolute;
+  opacity: 0.22;
+  filter: grayscale(100%);
+  user-select: none;
+}
+
+/* Different sizes and positions */
+
+.p1 { left: 4%; top: 8%; font-size: 70px; }
+.p2 { left: 23%; top: 18%; font-size: 45px; opacity: .15; }
+.p3 { right: 5%; top: 7%; font-size: 90px; }
+.p4 { left: 8%; bottom: 10%; font-size: 100px; }
+.p5 { right: 12%; bottom: 8%; font-size: 65px; }
+.p6 { left: 43%; top: 5%; font-size: 38px; opacity: .12; }
+.p7 { right: 35%; bottom: 5%; font-size: 50px; opacity: .13; }
+.p8 { left: 1%; top: 48%; font-size: 45px; opacity: .12; }
+.p9 { right: 2%; top: 50%; font-size: 55px; opacity: .14; }
+
+/* ---------- FLOATING DOTS ---------- */
+
+.dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  opacity: .3;
+  animation: float 5s infinite ease-in-out;
+}
+
+.d1 { left: 15%; top: 30%; }
+.d2 { left: 80%; top: 25%; animation-delay: 1s; }
+.d3 { left: 70%; top: 75%; animation-delay: 2s; }
+.d4 { left: 25%; top: 80%; animation-delay: 3s; }
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ---------- MAIN ---------- */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.card {
+  width: min(92vw, 500px);
+  padding: 35px 28px;
+  text-align: center;
+
+  background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 30px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.5);
+}
+
+/* ---------- PANDA ---------- */
+
+.big-panda {
+  font-size: 120px;
+  margin-bottom: 5px;
+
+  display: inline-block;
+
+  filter:
+    drop-shadow(0 15px 15px rgba(0,0,0,.5));
+
+  transition: transform .25s ease;
+}
+
+.big-panda:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+/* ---------- TEXT ---------- */
+
+.tag {
+  display: inline-block;
+  padding: 7px 14px;
+
+  border-radius: 30px;
+
+  background: rgba(255,255,255,.12);
+
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 18px 0 10px;
+}
+
+.subtitle {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+/* ---------- MESSAGE ---------- */
+
+.message {
+  margin: 25px 0;
+
+  padding: 18px;
+
+  background: rgba(0,0,0,.25);
+
+  border-radius: 18px;
+
+  color: #eee;
+  line-height: 1.6;
+}
+
+.message strong {
+  font-size: 18px;
+}
+
+/* ---------- BUTTON ---------- */
+
+button {
+  border: none;
+
+  padding: 15px 30px;
+
+  border-radius: 50px;
+
+  background: white;
+  color: #111;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+button:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 30px rgba(255,255,255,.2);
+}
+
+button:active {
+  transform: scale(.96);
+}
+
+#response {
+  min-height: 28px;
+  margin-top: 20px;
+
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.footer {
+  margin-top: 25px;
+
+  font-size: 11px;
+  color: #888;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:500px) {
+
+  .card {
+    padding: 28px 20px;
+  }
+
+  .big-panda {
+    font-size: 90px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+
+  .panda {
+    opacity: .13;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND PANDAS -->
+
+<div class="pandas">
+
+  <div class="panda p1">🐼</div>
+  <div class="panda p2">🐼</div>
+  <div class="panda p3">🐼</div>
+  <div class="panda p4">🐼</div>
+  <div class="panda p5">🐼</div>
+  <div class="panda p6">🐼</div>
+  <div class="panda p7">🐼</div>
+  <div class="panda p8">🐼</div>
+  <div class="panda p9">🐼</div>
+
+  <div class="dot d1"></div>
+  <div class="dot d2"></div>
+  <div class="dot d3"></div>
+  <div class="dot d4"></div>
+
+</div>
+
+
+<!-- MAIN CARD -->
+
+<div class="container">
+
+  <div class="card">
+
+    <div class="tag">
+      🐼 Ni Savu Nuvvu Savu 
+    </div>
+
+    <div class="big-panda" id="panda">
+      🐼
+    </div>
+
+    <h1>Arey Ritwiku🐵</h1>
+
+    <div class="subtitle">
+      Dhinike Unnav Sadhuvu Ledhu 
+      Style Minganike Unnav<br>
+      
+    <div>
+
+    <div class="message">
+
+      <strong>Chotu Advice Tisko🐵</strong>
+
+      <br><br>
+
+      Bagupadudham ra 😭🙏
+
+      <br>
+
+      Inka time undhi...
+      edho okati cheddham Ika Link Pettindhi Chalu
+
+    </div>
+
+    <button id="button">
+      Talk to Panda 🐼
+    </button>
+
+    <div id="response"></div>
+
+    <div class="footer">
+      Certified by absolutely Chotuu © 2026
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const button = document.getElementById("button");
+const panda = document.getElementById("panda");
+const response = document.getElementById("response");
+
+let clicks = 0;
+
+
+/* Funny sound */
+
+function playSound() {
+
+  const AudioContext =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  const audio = new AudioContext();
+
+  const oscillator =
+    audio.createOscillator();
+
+  const gain =
+    audio.createGain();
+
+  oscillator.type = "sine";
+
+  oscillator.frequency.setValueAtTime(
+    250,
+    audio.currentTime
+  );
+
+  oscillator.frequency.exponentialRampToValueAtTime(
+    650,
+    audio.currentTime + .18
+  );
+
+  gain.gain.setValueAtTime(
+    .25,
+    audio.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    .001,
+    audio.currentTime + .35
+  );
+
+  oscillator.connect(gain);
+  gain.connect(audio.destination);
+
+  oscillator.start();
+
+  oscillator.stop(
+    audio.currentTime + .35
+  );
+}
+
+
+/* Panda jump */
+
+function pandaJump() {
+
+  panda.animate(
+
+    [
+      {
+        transform:
+        "translateY(0) scale(1)"
+      },
+
+      {
+        transform:
+        "translateY(-70px) scale(1.08)"
+      },
+
+      {
+        transform:
+        "translateY(0) scale(.96)"
+      },
+
+      {
+        transform:
+        "translateY(-20px) scale(1.02)"
+      },
+
+      {
+        transform:
+        "translateY(0) scale(1)"
+      }
+    ],
+
+    {
+      duration: 700,
+      easing:
+      "cubic-bezier(.2,.8,.3,1)"
+    }
+
+  );
+}
+
+
+/* Troll messages */
+
+const messages = [
+
+  "🐼 Chotu says: Gudisipodham ra 😭",
+
+  "😭 Arey... inka Em kavali Ra ?",
+
+  "Dengeyy ra!",
+
+  "😽Butterfly Nadhee So called Chukka...",
+
+  "🐼 Serious ga chepthunna... life lo settle avvu!",
+
+  "💀 Study Ra Apple?",
+
+  "😭 Sare ra... Final Ga.",
+
+  "🐼 Time Waste Mingina Nidhii "
+
+];
+
+
+button.addEventListener("click", () => {
+
+  clicks++;
+
+  playSound();
+
+  pandaJump();
+
+  const message =
+    messages[
+      Math.floor(
+        Math.random() *
+        messages.length
+      )
+    ];
+
+  response.textContent = message;
+
+  if (clicks >= 5) {
+
+    button.textContent =
+      "Click Chesthe Kojja😭";
+
+  } else {
+
+    button.textContent =
+      "Again? 👀";
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
